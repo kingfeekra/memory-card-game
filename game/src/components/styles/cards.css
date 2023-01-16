@@ -1,0 +1,12 @@
+.cardSection {
+    display: flex;
+}
+
+.card {
+    width: 100px;
+    height: 200px;
+    background-color: aqua;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+}
