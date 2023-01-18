@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 import React, { useEffect, useState } from "react"; 
 import Score from "./score";
 import "./styles/cards.css"
@@ -17,16 +18,18 @@ const Cards = () => {
                     cardState[dataNumber] = true;
                     console.log(cardState);
                 }
-
                 if(allTrue(cardState)) {
+                    clearCardSection();
+                    cardState = {}
                     setNumber(numberOfCards + 2)
+                    console.log(numberOfCards)
                 }
 
                 var list = document.querySelector(".cardSection");
                 for (var i = list.children.length; i >= 0; i--) {
                 list.appendChild(list.children[Math.random() * i | 0]);
                 }
-            },[numberOfCards])
+            })
             cardSection.appendChild(card);
         }
         getCharacters();
@@ -35,13 +38,14 @@ const Cards = () => {
 
     let cardState = {};
 
+    function clearCardSection() {
+        let cardSection = document.querySelector(".cardSection")
+        cardSection.innerHTML = "";
+    }
+
     function allTrue(obj) {
-        for(var i in obj) {
-            if(!obj[i]) {
-                return false
-            }
-            return true
-        }
+        const cardValues = Object.values(obj);
+        return cardValues.every(element => element === true)
     }
 
     async function getCharacters() {
@@ -60,7 +64,7 @@ const Cards = () => {
         max = Math.floor(max);
         let number = Math.floor(Math.random() * (max - min) + min); 
 
-        if(number === saved) {
+        if(saved.includes(number)) {
             getRandomInt(min, max, saved);
         }
         else {
@@ -70,12 +74,12 @@ const Cards = () => {
 
     const populateCards = (obj) => {
         const cardList = document.querySelectorAll(".card");
-        let savedNumber = 53;
+        let savedNumbers = [];
         for(let i = 0; i < cardList.length; i++) {
-            let number = getRandomInt(0, 53, savedNumber);
-            savedNumber = number;
+            let number = getRandomInt(0, 53, savedNumbers);
+            savedNumbers.push(number);
+            console.log(savedNumbers);
             cardState[number] = false;
-            console.log(cardState);
 
             const img = document.createElement("img");
             img.src = obj[number].imageUrl;
