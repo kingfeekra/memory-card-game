@@ -5,6 +5,31 @@ import "./styles/cards.css"
 
 const Cards = () => {
     const [numberOfCards, setNumber] = useState(4);
+    const [score, setScore] = useState(0);
+    const [highScore, setHighScore] = useState(0);
+
+    const incrementScore = () => {
+        setScore((score + 1));
+        console.log(score);
+    }
+
+    const resetScore = () => {
+        setScore(0);
+    }
+
+    useEffect(() => {
+        if(score > highScore) {
+            setHighScore(score)
+        };
+    
+    }, [score, highScore])
+
+    useEffect(() => {
+        let cardList = document.querySelectorAll(".card")
+        for(let i = 0; i < cardList.length; i++) {
+            cardList[i].onclick = incrementScore;
+        }
+    }, [score])
 
     useEffect(() => {
 
@@ -12,6 +37,7 @@ const Cards = () => {
             let cardSection = document.querySelector(".cardSection");
             let card = document.createElement("div")
             card.classList.add("card");
+            card.onclick = incrementScore;
             card.addEventListener("click", () => {
                 let dataNumber = card.firstChild.dataset.idNumber;
                 if(cardState[dataNumber] === false) {
@@ -93,8 +119,16 @@ const Cards = () => {
     }
 
     return (
-        <div className="cardSection">
+        <div>
+            <div>
+            <p>Score: {score}</p>
+            <p>High score: {highScore}</p>
+            <button onClick={incrementScore}>Increment</button>
+            <button onClick={resetScore}>Reset</button>
+            </div>
+            <div className="cardSection">
             
+            </div>
         </div>
     )
 }
