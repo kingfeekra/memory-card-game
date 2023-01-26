@@ -25,19 +25,12 @@ const Cards = () => {
     }, [score, highScore])
 
     useEffect(() => {
-        let cardList = document.querySelectorAll(".card")
-        for(let i = 0; i < cardList.length; i++) {
-            cardList[i].onclick = incrementScore;
-        }
-    }, [score])
-
-    useEffect(() => {
 
         for(let i = 0; i < numberOfCards; i++) {
             let cardSection = document.querySelector(".cardSection");
             let card = document.createElement("div")
             card.classList.add("card");
-            card.onclick = incrementScore;
+            
             card.addEventListener("click", () => {
                 let dataNumber = card.firstChild.dataset.idNumber;
                 if(cardState[dataNumber] === false) {
@@ -61,6 +54,15 @@ const Cards = () => {
         getCharacters();
 
     }, [numberOfCards])
+
+    useEffect(() => {
+        let cardList = document.querySelectorAll(".card")
+        for(let i = 0; i < cardList.length; i++) {
+                cardList[i].addEventListener("click", () => {
+                    incrementScore();
+                })
+        }
+    }, [score, numberOfCards])
 
     let cardState = {};
 
@@ -91,16 +93,17 @@ const Cards = () => {
         let number = Math.floor(Math.random() * (max - min) + min); 
 
         if(saved.includes(number)) {
-            getRandomInt(min, max, saved);
+            return getRandomInt(min, max, saved);
         }
         else {
             return number;
         }
     }
 
+    let savedNumbers = [];
+
     const populateCards = (obj) => {
         const cardList = document.querySelectorAll(".card");
-        let savedNumbers = [];
         for(let i = 0; i < cardList.length; i++) {
             let number = getRandomInt(0, 53, savedNumbers);
             savedNumbers.push(number);
@@ -115,6 +118,10 @@ const Cards = () => {
             const name = document.createElement("p");
             name.textContent = obj[number].fullName;
             cardList[i].appendChild(name);
+
+            if(i === cardList.length -1) {
+                savedNumbers = [];
+            }
         }
     }
 
