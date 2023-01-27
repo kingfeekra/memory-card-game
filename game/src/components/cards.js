@@ -7,6 +7,7 @@ const Cards = () => {
     const [numberOfCards, setNumber] = useState(4);
     const [score, setScore] = useState(0);
     const [highScore, setHighScore] = useState(0);
+    const [cardState, setCardState] = useState({});
 
     const incrementScore = () => {
         setScore((score + 1));
@@ -15,6 +16,13 @@ const Cards = () => {
 
     const resetScore = () => {
         setScore(0);
+    }
+
+    const updateCardState = (obj) => {
+        setCardState({
+            ...cardState,
+            ...obj
+        })
     }
 
     useEffect(() => {
@@ -32,14 +40,18 @@ const Cards = () => {
             card.classList.add("card");
             
             card.addEventListener("click", () => {
-                let dataNumber = card.firstChild.dataset.idNumber;
+                let dataNumber = card.dataset.idNumber;
+                if(cardState[dataNumber] === true) {
+                    resetScore();
+                }
                 if(cardState[dataNumber] === false) {
-                    cardState[dataNumber] = true;
+                    let newState = {dataNumber : true};
+                    updateCardState(newState);
                     console.log(cardState);
                 }
                 if(allTrue(cardState)) {
                     clearCardSection();
-                    cardState = {}
+                    //setCardState({});
                     setNumber(numberOfCards + 2)
                     console.log(numberOfCards)
                 }
@@ -59,12 +71,15 @@ const Cards = () => {
         let cardList = document.querySelectorAll(".card")
         for(let i = 0; i < cardList.length; i++) {
                 cardList[i].addEventListener("click", () => {
-                    incrementScore();
+                    //if(cardState[dataNumber] === false) {
+                        let dataNumber = cardList[i].getAttribute("data-id-number");
+                        incrementScore();
+                        //console.log(cardState)
+                    //}
                 })
         }
     }, [score, numberOfCards])
 
-    let cardState = {};
 
     function clearCardSection() {
         let cardSection = document.querySelector(".cardSection")
@@ -106,14 +121,18 @@ const Cards = () => {
         const cardList = document.querySelectorAll(".card");
         for(let i = 0; i < cardList.length; i++) {
             let number = getRandomInt(0, 53, savedNumbers);
-            savedNumbers.push(number);
-            console.log(savedNumbers);
-            cardState[number] = false;
+            savedNumbers.push(number); 
+            setCardState({
+                ...cardState,
+                [number] : false
+                
+            }, console.log(cardState))
+            
 
             const img = document.createElement("img");
             img.src = obj[number].imageUrl;
-            img.dataset.idNumber = number;
             cardList[i].appendChild(img);
+            img.parentNode.dataset.idNumber = number;
 
             const name = document.createElement("p");
             name.textContent = obj[number].fullName;
