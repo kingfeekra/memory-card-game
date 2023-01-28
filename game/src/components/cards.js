@@ -63,10 +63,9 @@ const Cards = () => {
         for(let i = 0; i < cardList.length; i++) {
                 cardList[i].addEventListener("click", () => {
                         incrementScore();
-                    
                 })
         }
-    }, [score, numberOfCards])
+    }, [numberOfCards])
 
 
     function clearCardSection() {
