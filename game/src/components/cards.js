@@ -21,7 +21,7 @@ const Cards = () => {
             setHighScore(score)
         };
     
-    }, [score, highScore])
+    }, [score])
 
     useEffect(() => {
 
@@ -34,9 +34,6 @@ const Cards = () => {
             card.addEventListener("click", () => {
                 let cardState = card.getAttribute("data-clicked");
                 console.log(cardState);
-                if(cardState === "true") {
-                    resetScore();
-                }
                 if(cardState === "false") {
                     card.setAttribute("data-clicked", true)
                     console.log(cardState);
@@ -44,6 +41,9 @@ const Cards = () => {
                 if(allTrue()) {
                     clearCardSection();
                     setNumber(numberOfCards + 2)
+                }
+                if(cardState === "true") {
+                    gameOver();
                 }
 
                 var list = document.querySelector(".cardSection");
@@ -71,6 +71,30 @@ const Cards = () => {
     function clearCardSection() {
         let cardSection = document.querySelector(".cardSection")
         cardSection.innerHTML = "";
+    }
+
+    function gameOver() {
+        let cardSection = document.querySelector(".cardSection");
+        cardSection.innerHTML = "";
+
+        let para = document.createElement("p");
+        para.textContent = "Game Over!"
+        cardSection.appendChild(para)
+
+        let button = document.createElement("button");
+        button.textContent = "Try Again"
+        button.onclick = function() {
+            cardSection.innerHTML = "";
+            if(numberOfCards > 4) {
+            setNumber(4);
+            }
+            else {
+                setNumber(5);
+            }
+            resetScore();
+            console.log(numberOfCards);
+        }
+        cardSection.appendChild(button);
     }
 
     function allTrue() {
