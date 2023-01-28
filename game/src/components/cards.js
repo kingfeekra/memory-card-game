@@ -9,8 +9,7 @@ const Cards = () => {
     const [highScore, setHighScore] = useState(0);
 
     const incrementScore = () => {
-        setScore((score + 1));
-        console.log(score);
+        
     }
 
     const resetScore = () => {
@@ -61,11 +60,12 @@ const Cards = () => {
     useEffect(() => {
         let cardList = document.querySelectorAll(".card")
         for(let i = 0; i < cardList.length; i++) {
-                cardList[i].addEventListener("click", () => {
-                        incrementScore();
-                })
+                cardList[i].onclick = function(){
+                    setScore((score + 1));
+                    console.log(score);
+                }
         }
-    }, [numberOfCards])
+    }, [score, numberOfCards])
 
 
     function clearCardSection() {
