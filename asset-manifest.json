@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/memory-card-game/static/css/main.941f797c.css",
+    "main.js": "/memory-card-game/static/js/main.31c9c146.js",
+    "static/media/Game of Thrones.ttf": "/memory-card-game/static/media/Game of Thrones.71fa190a8a1a34123fa1.ttf",
+    "index.html": "/memory-card-game/index.html",
+    "main.941f797c.css.map": "/memory-card-game/static/css/main.941f797c.css.map",
+    "main.31c9c146.js.map": "/memory-card-game/static/js/main.31c9c146.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.941f797c.css",
+    "static/js/main.31c9c146.js"
+  ]
+}
