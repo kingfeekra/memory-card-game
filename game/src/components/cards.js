@@ -77,9 +77,12 @@ const Cards = () => {
         let cardSection = document.querySelector(".cardSection");
         cardSection.innerHTML = "";
 
+        let div = document.createElement("div");
+        div.classList.add("gameOver");
+
         let para = document.createElement("p");
         para.textContent = "Game Over!"
-        cardSection.appendChild(para)
+        div.appendChild(para)
 
         let button = document.createElement("button");
         button.textContent = "Try Again"
@@ -94,7 +97,8 @@ const Cards = () => {
             resetScore();
             console.log(numberOfCards);
         }
-        cardSection.appendChild(button);
+        div.appendChild(button);
+        cardSection.appendChild(div);
     }
 
     function allTrue() {
@@ -159,14 +163,17 @@ const Cards = () => {
 
     return (
         <div>
-            <div>
-            <p>Score: {score}</p>
-            <p>High score: {highScore}</p>
-            <button onClick={incrementScore}>Increment</button>
-            <button onClick={resetScore}>Reset</button>
+            <div className="header">
+            <div className="heading">
+                <h1>Game of Thrones Memory Game</h1>
+                <p>Get points by clicking on an image but don't click on any more than once!</p>
+            </div>
+            <div class="score">
+                <p>Score: {score}</p>
+                <p>High score: {highScore}</p>
+            </div>
             </div>
             <div className="cardSection">
-            
             </div>
         </div>
     )

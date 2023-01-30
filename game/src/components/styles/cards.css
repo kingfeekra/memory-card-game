@@ -1,12 +1,126 @@
+@font-face {
+    font-family: customFont;
+    src: url(./fonts/Game\ of\ Thrones.ttf);
+}
+
+body {
+    font-family: customFont;
+    background-color: #B9540C;
+}
+
 .cardSection {
     display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    flex-wrap: wrap;
 }
 
 .card {
-    width: 100px;
-    height: 200px;
-    background-color: aqua;
+    width: 220px;
+    height: 300px;
+    padding: 10px;
+    background-color: #FFF190;
     margin-right: 20px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 2px 6px;
+    transition: 80ms;
+}
+
+.card:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-10px);
+  background-color: #FCFEF0;
+}
+
+.card > img {
+    height: 70%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.header {
+ display: flex;
+ justify-content: space-between;
+ background-color: #B9540C;
+ color: #FCFEF0;
+}
+
+.heading {
+    text-align: left;
+}
+
+.heading > p {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.score {
+    text-align: left;
+}
+
+.gameOver > p {
+    font-size: 24px;
+}
+
+.gameOver > button {
+  appearance: none;
+  background-color: #000000;
+  border: 2px solid #1A1A1A;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+}
+
+.gameOver > button:disabled {
+  pointer-events: none;
+}
+
+.gameOver > button:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.gameOver > button:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+@media screen and (max-width: 1000px) {
+    .header {
+        display: flex;
+        flex-direction: column;
+        
+       }
+    
+    .heading {
+        text-align: center;
+    }
+
+    .score {
+        text-align: center;
+    }
+    .cardSection {
+        margin-top: 50px;
+    }
 }
