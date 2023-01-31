@@ -2,7 +2,7 @@
 
 #### (ReactJS, HTML, CSS, Thrones API)
 
-[Live Preview](https://kingfeekra.github.io/memory-card-game/ "Memory Game")
+#### [Live Preview](https://kingfeekra.github.io/memory-card-game/ "Memory Game")
 
 * Memory card game built with ReactJS. The user must click all displayed cards without clicking any card twice.
 * Designed user-friendly UI using React functional components and hooks.
